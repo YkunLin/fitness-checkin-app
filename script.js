@@ -107,6 +107,7 @@ function loadSelectedDate() {
     addExercise('俯卧撑', 0, 0)
     addExercise('深蹲', 0, 0)
     addExercise('卷腹', 0, 0)
+    addExercise('平板支撑', 0, 0)
   }
 
   updateSummary()

@@ -104,9 +104,9 @@ function loadSelectedDate() {
       addExercise(exercise.name, exercise.sets, exercise.reps)
     })
   } else {
-    addExercise('俯卧撑', 0, 0)
-    addExercise('深蹲', 0, 0)
-    addExercise('卷腹', 0, 0)
+    addExercise('俯卧撑', 0, 10)
+    addExercise('深蹲', 0, 15)
+    addExercise('卷腹', 0, 20)
     addExercise('平板支撑', 0, 0)
   }
 

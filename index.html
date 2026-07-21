@@ -11,59 +11,66 @@
     <header class="app-header">
       <div>
         <p class="eyebrow">Workout Tracker</p>
-        <h1>健身训练打卡</h1>
-        <p class="subtitle">记录每一天的训练，坚持就是进步。</p>
+        <h1 data-i18n="appTitle">健身训练打卡</h1>
+        <p class="subtitle" data-i18n="subtitle">记录每一天的训练，坚持就是进步。</p>
       </div>
-      <div class="streak-card">
-        <span>连续打卡</span>
-        <strong id="streak-count">0 天</strong>
+      <div class="header-actions">
+        <button id="language-btn" class="language-btn" type="button" aria-label="Switch language">EN</button>
+        <div class="streak-card">
+          <span data-i18n="streak">连续打卡</span>
+          <strong id="streak-count">0 天</strong>
+        </div>
       </div>
     </header>
 
     <section class="card date-section">
-      <label for="workout-date">训练日期</label>
+      <label for="workout-date" data-i18n="workoutDate">训练日期</label>
       <input type="date" id="workout-date" />
     </section>
 
+    <section class="card weekly-plan-section">
+      <div class="section-heading week-heading">
+        <div>
+          <p class="eyebrow">WEEKLY PLAN</p>
+          <h2 data-i18n="weeklyPlan">每周训练计划</h2>
+          <p id="week-range" class="week-range"></p>
+          <p id="plan-source" class="plan-source"></p>
+        </div>
+        <div class="week-controls">
+          <button id="prev-week-btn" class="icon-btn" type="button" data-i18n-aria="previousWeek" aria-label="上一周">‹</button>
+          <button id="current-week-btn" class="secondary-btn" type="button" data-i18n="thisWeek">本周</button>
+          <button id="next-week-btn" class="icon-btn" type="button" data-i18n-aria="nextWeek" aria-label="下一周">›</button>
+        </div>
+      </div>
+      <div id="weekly-calendar" class="weekly-calendar"></div>
+      <div class="weekly-actions">
+        <button id="save-plan-btn" class="primary-btn" type="button" data-i18n="saveWeeklyPlan">保存本周计划</button>
+        <p id="plan-message" class="save-message" aria-live="polite"></p>
+      </div>
+    </section>
+
     <section class="summary-grid">
-      <article class="summary-card">
-        <span>训练动作</span>
-        <strong id="exercise-count">0</strong>
-      </article>
-      <article class="summary-card">
-        <span>总组数</span>
-        <strong id="total-sets">0</strong>
-      </article>
-      <article class="summary-card">
-        <span>总次数</span>
-        <strong id="total-reps">0</strong>
-      </article>
+      <article class="summary-card"><span data-i18n="exercises">训练动作</span><strong id="exercise-count">0</strong></article>
+      <article class="summary-card"><span data-i18n="totalSets">总组数</span><strong id="total-sets">0</strong></article>
+      <article class="summary-card"><span data-i18n="totalReps">总次数</span><strong id="total-reps">0</strong></article>
     </section>
 
     <section class="card">
       <div class="section-heading">
-        <div>
-          <p class="eyebrow">TODAY'S WORKOUT</p>
-          <h2>今日训练</h2>
-        </div>
-        <button id="add-exercise-btn" class="secondary-btn">＋ 添加动作</button>
+        <div><p class="eyebrow">TODAY'S WORKOUT</p><h2 data-i18n="todayWorkout">今日训练</h2></div>
+        <button id="add-exercise-btn" class="secondary-btn" type="button" data-i18n="addExercise">＋ 添加动作</button>
       </div>
-
       <div id="exercise-list" class="exercise-list"></div>
-
       <div class="actions">
-        <button id="save-btn" class="primary-btn">保存今日打卡</button>
-        <button id="clear-btn" class="danger-btn">清空今日记录</button>
+        <button id="save-btn" class="primary-btn" type="button" data-i18n="saveWorkout">保存今日打卡</button>
+        <button id="clear-btn" class="danger-btn" type="button" data-i18n="clearWorkout">清空今日记录</button>
       </div>
       <p id="save-message" class="save-message" aria-live="polite"></p>
     </section>
 
     <section class="card history-section">
       <div class="section-heading">
-        <div>
-          <p class="eyebrow">HISTORY</p>
-          <h2>最近记录</h2>
-        </div>
+        <div><p class="eyebrow">HISTORY</p><h2 data-i18n="recentRecords">最近记录</h2></div>
       </div>
       <div id="history-list" class="history-list"></div>
     </section>
@@ -72,26 +79,30 @@
   <template id="exercise-template">
     <article class="exercise-item">
       <div class="exercise-top">
-        <input class="exercise-name" type="text" placeholder="动作名称，例如：俯卧撑" />
-        <button class="remove-btn" type="button" aria-label="删除动作">×</button>
+        <input class="exercise-name" type="text" />
+        <button class="remove-btn" type="button" data-i18n-aria="removeExercise" aria-label="删除动作">×</button>
       </div>
       <div class="exercise-fields">
-        <label>
-          <span>组数</span>
-          <input class="sets-input" type="number" min="0" value="0" />
-        </label>
-        <label>
-          <span>每组次数</span>
-          <input class="reps-input" type="number" min="0" value="0" />
-        </label>
-        <div class="exercise-total">
-          <span>总次数</span>
-          <strong class="item-total">0</strong>
-        </div>
+        <label><span data-i18n="sets">组数</span><input class="sets-input" type="number" min="0" value="0" /></label>
+        <label><span data-i18n="repsPerSet">每组次数</span><input class="reps-input" type="number" min="0" value="0" /></label>
+        <div class="exercise-total"><span data-i18n="totalReps">总次数</span><strong class="item-total">0</strong></div>
       </div>
     </article>
   </template>
 
+  <div id="record-modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close">×</button>
+      <p class="eyebrow">WORKOUT DETAILS</p>
+      <h2 id="modal-title" data-i18n="workoutDetails">训练详情</h2>
+      <p id="modal-date" class="modal-date"></p>
+      <div id="modal-exercises" class="modal-exercises"></div>
+      <div id="modal-summary" class="modal-summary"></div>
+    </section>
+  </div>
+
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

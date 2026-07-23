@@ -1,5 +1,5 @@
 // Read/write `localStorage` data
-import { DEFAULT_EXERCISES } from "./config";
+import { DEFAULT_EXERCISES } from "./config.js";
 
 const STORAGE_KEYS = {
     exercises: "workoutTracker_exercises",

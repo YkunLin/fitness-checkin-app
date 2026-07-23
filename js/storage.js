@@ -45,3 +45,38 @@ export function getExercise() {
 
     return defaultExercises
 }
+
+export function saveExercises(exercise){
+    return writeJSON(STORAGE_KEYS.exercises, exercise)
+}
+
+export function resetExercises(){
+    const defaultExercises = structuredClone(DEFAULT_EXERCISES)
+    saveExercises(defaultExercises)
+
+    return defaultExercises
+}
+
+export function getWeeklyPlans(){
+    return readJSON(STORAGE_KEYS.weeklyPlans, {})
+}
+
+export function saveWeeklyPlans(weeklyPlans){
+    return writeJSON(STORAGE_KEYS.weeklyPlans, weeklyPlans)
+}
+
+export function getWorkouts(){
+    return readJSON(STORAGE_KEYS.workouts, [])
+}
+
+export function saveWorkouts(workouts){
+    return writeJSON(STORAGE_KEYS.workouts, workouts)
+}
+
+export function getLanguage(){
+    return localStorage.getItem(STORAGE_KEYS.language) || "zh"
+}
+
+export function saveLanguage(language){
+    localStorage.setItem(STORAGE_KEYS.language, language)
+}

@@ -7,10 +7,96 @@
         <link rel="stylesheet" href="./css/responsive.css">
     </head>
     <body>
-        <main>
-            <h1>Workout Tracker</h1>
-            <p>项目初始化成功</p>
-        </main>
+        <div class="app">
+            <header class="app-header">
+                <div>
+                    <p class="eyebrow">Workout Tracker</p>
+                    <h1>训练设置</h1>
+                </div>
+
+                <button id="language-btn" class="icon-btn" type="button">EN</button>
+            </header>
+
+            <main class="app-main">
+                <section class="settings-section">
+                    <div class="section-heading">
+                        <div>
+                            <h2>默认训练动作</h2>
+                            <p>这些动作会显示在新的训练记录中。</p>
+                        </div>
+
+                        <button id="add-exercise-btn" class="primary-btn" type="button">
+                            + 添加动作
+                        </button>
+                    </div>
+
+                    <div id="exercise-list" class="exercise-list"></div>
+
+                    <div class="settings-actions">
+                        <button id="save-settings-btn" class="primary-btn" type="button">
+                            保存设置
+                        </button>
+
+                        <button id="reset-settings-btn" class="secondary-btn" type="button">
+                            恢复默认
+                        </button>
+                    </div>
+
+                    <p id="settings-message" class="settings-message"></p>
+                </section>
+            </main>
+        </div>
+
+        <template id="exercise-card-template">
+            <article class="exercise-card">
+                <div class="exercise-card-header">
+                    <h3 class="exercise-number">动作</h3>
+
+                    <button class="delete-exercise-btn" type="button">删除</button>
+                </div>
+
+                <div class="form-grid">
+                    <label>
+                        中文名称
+                        <input class="exercise-name-zh" type="text" placeholder="例如：俯卧撑">
+                    </label>
+
+                    <label>
+                        英文名称
+                        <input class="exercise-name-en" type="text" placeholder="例如：Push-ups">
+                    </label>
+
+                    <label>
+                        默认组数
+                        <input class="exercise-sets" type="number" min="1" inputmode="numeric">
+                    </label>
+
+                    <label>
+                        每组默认数值
+                        <input class="exercise-value" type="number" min="1" inputmode="numeric">
+                    </label>
+
+                    <label>
+                        记录类型
+                        <select class="exercise-type">
+                            <option value="reps">次数</option>
+                            <option value="duration">时长</option>
+                        </select>
+                    </label>
+
+                    <lable>
+                        中文单位
+                        <input class="exercise-unit-zh" type="text" placeholder="次 / 秒">
+                    </lable>
+
+                    <lable>
+                        英文单位
+                        <input class="exercise-unit-en" type="text" placeholder="reps / sec">
+                    </lable>
+                </div>
+            </article>
+        </template>
+        
         <script src="./js/app.js" type="module"></script>
     </body>
 </html>

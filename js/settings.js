@@ -5,7 +5,7 @@ import {
     resetExercises
 } from "./storage.js"
 
-let exercise = []
+let exercises = []
 
 function createExerciseId(name) {
     const normalizedName = name
@@ -17,4 +17,48 @@ function createExerciseId(name) {
     const randomPart = Math.random().toString(36).slice(2, 7)
 
     return `${normalizedName || "exercise"}-${randomPart}`
+}
+
+function createEmptyExercise(){
+    return {
+        id: createExerciseId("exercise"),
+        names: {
+            zh: "",
+            en: ""
+        },
+        defaultSets: 0,
+        defaultValue: 10,
+        trackingType: "reps",
+        units: {
+            zh: "次",
+            en: "reps"
+        }
+    }
+}
+
+function getElements(){
+    return {
+        list: document.getElementById("exercise-list"),
+        template: document.getElementById("exercise-card-template"),
+        addButton: document.getElementById("add-exercise-btn"),
+        saveButton: document.getElementById("save-settings-btn"),
+        resetButton: document.getElementById("reset-settings-btn"),
+        message: document.getElementById("settings-message")
+    }
+}
+
+function renderExercises(){
+    const {list, template} = getElements()
+
+    list.innerHTML = ""
+
+    exercises.forEach((exercise, index) => {
+        const fragment = template.content.cloneNode(true)
+        const card = fragment.querySelector(".exercise-card")
+
+        card.dataset.exerciseId = exercise.id
+
+        fragment.querySelector(".exercise-number").textContent = `动作 ${index + 1}`
+        
+    })
 }

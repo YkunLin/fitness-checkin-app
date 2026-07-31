@@ -59,6 +59,20 @@ function renderExercises(){
         card.dataset.exerciseId = exercise.id
 
         fragment.querySelector(".exercise-number").textContent = `动作 ${index + 1}`
-        
+        fragment.querySelector(".exercise-name-zh").value = exercise.names.zh
+        fragment.querySelector(".exercise-name-en").value = exercise.names.en
+        fragment.querySelector(".exercise-sets").value = exercise.defaultSets
+        fragment.querySelector(".exercise-value").value = exercise.defaultValue
+        fragment.querySelector(".exercise-type").value = exercise.trackingType
+        fragment.querySelector(".exercise-unit-zh").value = exercise.units.zh
+        fragment.querySelector(".exercise-unit-en").value = exercise.units.en
+    
+        const deleteButton = fragment.querySelector(".delete-exercise-btn")
+
+        deleteButton.addEventListener("click", () => {
+            deleteExercise(exercise.id)
+        })
+
+        list.appendChild(fragment)
     })
 }

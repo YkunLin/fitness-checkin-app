@@ -76,3 +76,49 @@ function renderExercises(){
         list.appendChild(fragment)
     })
 }
+
+function readExercisesFromForm(){
+    const cards = document.querySelectorAll(".exercise-card")
+
+    return [...cards].map((card) => {
+        const id = card.dataset.exerciseId
+
+        return {
+            id,
+            names: {
+                zh: card
+                    .querySelector(".exercise-name-zh")
+                    .value
+                    .trim(),
+                
+                en: card
+                    .querySelector(".exercise-name-en")
+                    .value
+                    .trim()
+            },
+
+            defaultSets: Number(
+                card.querySelector(".exercise-sets").value
+            ),
+
+            defaultValue: Number(
+                card.querySelector(".exercise-value").value
+            ),
+
+            trackingType:
+                card.querySelector(".exercise-type").value,
+
+            units: {
+                zh: card
+                    .querySelector(".exercise-unit-zh")
+                    .value
+                    .trim(),
+
+                en: card
+                    .querySelector(".exercise-unit-en")
+                    .value
+                    .trim()
+            }
+        }
+    })
+}

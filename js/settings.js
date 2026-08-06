@@ -122,3 +122,25 @@ function readExercisesFromForm(){
         }
     })
 }
+
+function validateExercises(updatedExercises){
+    if (updatedExercises.length === 0){
+        return "至少需要保留一个训练动作。"
+    }
+
+    for (const exercise of updatedExercises) {
+        if (!exercise.names.zh || !exercise.names.en) {
+            return "请填写所有动作的中文名称和英文名称。"
+        }
+
+        if (exercise.defaultSets < 1 || exercise.defaultValue < 1) {
+            return "组数和每组数值必须大于 0。"
+        }
+
+        if (!exercise.units.zh || !exercise.units.en) {
+            return "请填写中文单位和英文单位。"
+        }
+    }
+
+    return null
+}

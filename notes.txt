@@ -1,0 +1,7 @@
+Fitness-app:
+    已完成config.js
+    已完成storage.js
+    已完成index.html
+    已完成setting.js
+    已更新app.js
+    下一步：style.css

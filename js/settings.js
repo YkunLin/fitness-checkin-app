@@ -144,3 +144,23 @@ function validateExercises(updatedExercises){
 
     return null
 }
+
+function showMessage(text, type = "success") {
+    const {message} = getElements()
+
+    message.textContent = text
+    message.className = `settings-message ${type}`
+}
+
+function addExercise() {
+    exercises.push(createEmptyExercise())
+    renderExercises()
+
+    const cards = document.querySelectorAll(".exercise-card")
+    const lastCard = cards[cards.length - 1]
+
+    lastCard?.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    })
+}

@@ -1,11 +1,10 @@
 // Launch the entire app
-import { getExercise } from "./storage.js"
+import { initializeSettings } from "./settings.js"
 
 function initializeApp(){
-    const exercises = getExercise()
+    initializeSettings()
 
     console.log("Workout Tracker started")
-    console.log("Default exercises:", exercises)
 }
 
 initializeApp()

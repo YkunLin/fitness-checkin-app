@@ -33,7 +33,7 @@ function writeJSON(key, value) {
     }
 }
 
-export function getExercise() {
+export function getExercises() {
     const exercises = readJSON(STORAGE_KEYS.exercises, null)
 
     if (exercises){

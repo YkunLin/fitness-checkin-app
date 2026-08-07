@@ -164,3 +164,56 @@ function addExercise() {
         block: "center"
     })
 }
+
+function deleteExercise(exerciseId){
+    exercises = exercises.filter(
+        (exercise)=> exercise.id !== exerciseId
+    )
+
+    renderExercises()
+}
+
+function handleSave() {
+    const updatedExercises = readExercisesFromForm()
+    const validationError = validateExercises(updatedExercises)
+
+    if (validationError) {
+        showMessage(validationError, "error")
+        return
+    }
+
+    const saved = saveExercises(updatedExercises)
+
+    if (!saved) {
+        showMessage("保存失败，请稍后重试。", "error")
+        return
+    }
+
+    exercises = updatedExercises
+    showMessage("默认动作已保存。")
+}
+
+function handleReset() {
+    const confirmed = window.confirm(
+        "确定要恢复官方默认动作吗？"
+    )
+
+    if (!confirmed) {
+        return
+    }
+
+    exercises = resetExercises()
+    renderExercises()
+    showMessage("已经恢复默认动作。")
+}
+
+export function initializeSettings() {
+    const {addButton, saveButton, resetButton} = getElements()
+
+    exercises = getExercises()
+    renderExercises()
+
+    addButton.addEventListener("click", addExercise)
+    saveButton.addEventListener("click", handleSave)
+    resetButton.addEventListener("click", handleReset)
+}

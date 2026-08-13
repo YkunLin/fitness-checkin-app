@@ -2,10 +2,12 @@
 import {
     getExercises,
     saveExercises,
-    resetExercises
+    resetExercises,
+    getLanguage
 } from "./storage.js"
 
 let exercises = []
+let currentLanguage = getLanguage()
 
 function createExerciseId(name) {
     const normalizedName = name
@@ -59,13 +61,11 @@ function renderExercises(){
         card.dataset.exerciseId = exercise.id
 
         fragment.querySelector(".exercise-number").textContent = `动作 ${index + 1}`
-        fragment.querySelector(".exercise-name-zh").value = exercise.names.zh
-        fragment.querySelector(".exercise-name-en").value = exercise.names.en
+        fragment.querySelector(".exercise-name").value = exercise.names[currentLanguage]
         fragment.querySelector(".exercise-sets").value = exercise.defaultSets
         fragment.querySelector(".exercise-value").value = exercise.defaultValue
         fragment.querySelector(".exercise-type").value = exercise.trackingType
-        fragment.querySelector(".exercise-unit-zh").value = exercise.units.zh
-        fragment.querySelector(".exercise-unit-en").value = exercise.units.en
+        fragment.querySelector(".exercise-unit").value = exercise.units[currentLanguage]
     
         const deleteButton = fragment.querySelector(".delete-exercise-btn")
 
@@ -83,62 +83,61 @@ function readExercisesFromForm(){
     return [...cards].map((card) => {
         const id = card.dataset.exerciseId
 
-        return {
-            id,
-            names: {
-                zh: card
-                    .querySelector(".exercise-name-zh")
-                    .value
-                    .trim(),
-                
-                en: card
-                    .querySelector(".exercise-name-en")
-                    .value
-                    .trim()
-            },
+        const oldExercise = exercises.find(
+            (exercise) => exercise.id === id
+        );
 
-            defaultSets: Number(
-                card.querySelector(".exercise-sets").value
-            ),
+        const updatedExercise = structuredClone(oldExercise);
 
-            defaultValue: Number(
-                card.querySelector(".exercise-value").value
-            ),
+        updatedExercise.names[currentLanguage] =
+            card.querySelector(".exercise-name").value.trim();
 
-            trackingType:
-                card.querySelector(".exercise-type").value,
+        updatedExercise.defaultSets =
+            Number(card.querySelector(".exercise-sets").value);
 
-            units: {
-                zh: card
-                    .querySelector(".exercise-unit-zh")
-                    .value
-                    .trim(),
+        updatedExercise.defaultValue =
+            Number(card.querySelector(".exercise-value").value);
 
-                en: card
-                    .querySelector(".exercise-unit-en")
-                    .value
-                    .trim()
-            }
-        }
+        updatedExercise.trackingType =
+            card.querySelector(".exercise-type").value;
+
+        updatedExercise.units[currentLanguage] =
+            card.querySelector(".exercise-unit").value.trim();
+
+        return updatedExercise;
     })
 }
 
-function validateExercises(updatedExercises){
-    if (updatedExercises.length === 0){
-        return "至少需要保留一个训练动作。"
+function validateExercises(updatedExercises) {
+    if (updatedExercises.length === 0) {
+        return currentLanguage === "zh"
+            ? "至少需要保留一个训练动作。"
+            : "You need to keep at least one exercise."
     }
 
     for (const exercise of updatedExercises) {
-        if (!exercise.names.zh || !exercise.names.en) {
-            return "请填写所有动作的中文名称和英文名称。"
+        if (!exercise.names[currentLanguage]) {
+            return currentLanguage === "zh"
+                ? "请填写动作名称。"
+                : "Please enter an exercise name."
         }
 
-        if (exercise.defaultSets < 1 || exercise.defaultValue < 1) {
-            return "组数和每组数值必须大于 0。"
+        if (exercise.defaultSets < 0) {
+            return currentLanguage === "zh"
+                ? "组数不能小于 0。"
+                : "Sets cannot be below 0."
         }
 
-        if (!exercise.units.zh || !exercise.units.en) {
-            return "请填写中文单位和英文单位。"
+        if (exercise.defaultValue < 1) {
+            return currentLanguage === "zh"
+                ? "每组数值必须大于 0。"
+                : "The value per set must be greater than 0."
+        }
+
+        if (!exercise.units[currentLanguage]) {
+            return currentLanguage === "zh"
+                ? "请填写单位。"
+                : "Please enter a unit."
         }
     }
 

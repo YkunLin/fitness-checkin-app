@@ -3,11 +3,11 @@ import {
     getExercises,
     saveExercises,
     resetExercises,
-    getLanguage
 } from "./storage.js"
 
+import { getCurrentLanguage, t, updatePageLanguage } from "./language.js"
+
 let exercises = []
-let currentLanguage = getLanguage()
 
 function createExerciseId(name) {
     const normalizedName = name
@@ -60,12 +60,12 @@ function renderExercises(){
 
         card.dataset.exerciseId = exercise.id
 
-        fragment.querySelector(".exercise-number").textContent = `动作 ${index + 1}`
-        fragment.querySelector(".exercise-name").value = exercise.names[currentLanguage]
+        fragment.querySelector(".exercise-number").textContent = `${t("exercise")} ${index + 1}`
+        fragment.querySelector(".exercise-name").value = exercise.names[getCurrentLanguage()]
         fragment.querySelector(".exercise-sets").value = exercise.defaultSets
         fragment.querySelector(".exercise-value").value = exercise.defaultValue
         fragment.querySelector(".exercise-type").value = exercise.trackingType
-        fragment.querySelector(".exercise-unit").value = exercise.units[currentLanguage]
+        fragment.querySelector(".exercise-unit").value = exercise.units[getCurrentLanguage()]
     
         const deleteButton = fragment.querySelector(".delete-exercise-btn")
 
@@ -75,6 +75,8 @@ function renderExercises(){
 
         list.appendChild(fragment)
     })
+
+    updatePageLanguage()
 }
 
 function readExercisesFromForm(){
@@ -89,7 +91,7 @@ function readExercisesFromForm(){
 
         const updatedExercise = structuredClone(oldExercise);
 
-        updatedExercise.names[currentLanguage] =
+        updatedExercise.names[getCurrentLanguage()] =
             card.querySelector(".exercise-name").value.trim();
 
         updatedExercise.defaultSets =
@@ -101,7 +103,7 @@ function readExercisesFromForm(){
         updatedExercise.trackingType =
             card.querySelector(".exercise-type").value;
 
-        updatedExercise.units[currentLanguage] =
+        updatedExercise.units[getCurrentLanguage()] =
             card.querySelector(".exercise-unit").value.trim();
 
         return updatedExercise;
@@ -109,33 +111,34 @@ function readExercisesFromForm(){
 }
 
 function validateExercises(updatedExercises) {
+    const language = getCurrentLanguage()
     if (updatedExercises.length === 0) {
-        return currentLanguage === "zh"
+        return language === "zh"
             ? "至少需要保留一个训练动作。"
             : "You need to keep at least one exercise."
     }
 
     for (const exercise of updatedExercises) {
-        if (!exercise.names[currentLanguage]) {
-            return currentLanguage === "zh"
+        if (!exercise.names[language]) {
+            return language === "zh"
                 ? "请填写动作名称。"
                 : "Please enter an exercise name."
         }
 
         if (exercise.defaultSets < 0) {
-            return currentLanguage === "zh"
+            return language === "zh"
                 ? "组数不能小于 0。"
                 : "Sets cannot be below 0."
         }
 
         if (exercise.defaultValue < 1) {
-            return currentLanguage === "zh"
+            return language === "zh"
                 ? "每组数值必须大于 0。"
                 : "The value per set must be greater than 0."
         }
 
-        if (!exercise.units[currentLanguage]) {
-            return currentLanguage === "zh"
+        if (!exercise.units[language]) {
+            return language === "zh"
                 ? "请填写单位。"
                 : "Please enter a unit."
         }
@@ -215,4 +218,12 @@ export function initializeSettings() {
     addButton.addEventListener("click", addExercise)
     saveButton.addEventListener("click", handleSave)
     resetButton.addEventListener("click", handleReset)
+}
+
+export function preserveSettingsForm() {
+    exercises = readExercisesFromForm();
+}
+
+export function refreshSettingsLanguage() {
+    renderExercises();
 }

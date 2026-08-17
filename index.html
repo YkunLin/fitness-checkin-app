@@ -16,7 +16,7 @@
             <header class="app-header">
                 <div>
                     <p class="eyebrow">Workout Tracker</p>
-                    <h1>训练设置</h1>
+                    <h1 data-i18n="pageTitle">训练设置</h1>
                 </div>
 
                 <button id="language-btn" class="icon-btn" type="button">EN</button>
@@ -26,11 +26,11 @@
                 <section class="settings-section">
                     <div class="section-heading">
                         <div>
-                            <h2>默认训练动作</h2>
-                            <p>这些动作会显示在新的训练记录中。</p>
+                            <h2 data-i18n="defaultExercises">默认训练动作</h2>
+                            <p data-i18n="description">这些动作会显示在新的训练记录中。</p>
                         </div>
 
-                        <button id="add-exercise-btn" class="primary-btn" type="button">
+                        <button id="add-exercise-btn" class="primary-btn" type="button" data-i18n="addExercise">
                             + 添加动作
                         </button>
                     </div>
@@ -38,11 +38,11 @@
                     <div id="exercise-list" class="exercise-list"></div>
 
                     <div class="settings-actions">
-                        <button id="save-settings-btn" class="primary-btn" type="button">
+                        <button id="save-settings-btn" class="primary-btn" type="button" data-i18n="saveSettings">
                             保存设置
                         </button>
 
-                        <button id="reset-settings-btn" class="secondary-btn" type="button">
+                        <button id="reset-settings-btn" class="secondary-btn" type="button" data-i18n="resetSettings">
                             恢复默认
                         </button>
                     </div>
@@ -57,21 +57,22 @@
                 <div class="exercise-card-header">
                     <h3 class="exercise-number">动作</h3>
 
-                    <button class="delete-exercise-btn" type="button">删除</button>
+                    <button class="delete-exercise-btn" type="button" data-i18n="delete">删除</button>
                 </div>
 
                 <div class="form-grid">
                     <label>
-                        <span class="exercise-name-label">动作名称</span>
+                        <span class="exercise-name-label" data-i18n="exerciseName">动作名称</span>
                         <input
                             class="exercise-name"
                             type="text"
+                            data-i18n-placeholder="exercisePlaceholder"
                             placeholder="例如：俯卧撑"
                         >
                     </label>
 
                     <label>
-                        <span class="exercise-sets-label">组数</span>
+                        <span class="exercise-sets-label" data-i18n="sets">组数</span>
                         <input
                             class="exercise-sets"
                             type="number"
@@ -81,23 +82,29 @@
                     </label>
 
                     <label>
-                        每组次数
+                        <span data-i18n="valuePerSet">
+                            每组次数
+                        </span>
+                        
                         <input class="exercise-value" type="number" min="1" inputmode="numeric">
                     </label>
 
                     <label>
-                        记录类型
+                        <span data-i18n="trackingType">
+                            记录类型
+                        </span>
                         <select class="exercise-type">
-                            <option value="reps">次数</option>
-                            <option value="duration">时长</option>
+                            <option value="reps" data-i18n="reps">次数</option>
+                            <option value="duration" data-i18n="duration">时长</option>
                         </select>
                     </label>
 
                     <label>
-                        <span class="exercise-unit-label">单位</span>
+                        <span class="exercise-unit-label" data-i18n="unit">单位</span>
                         <input
                             class="exercise-unit"
                             type="text"
+                            data-i18n-placeholder="unitPlaceholder"
                             placeholder="次"
                         >
                     </label>

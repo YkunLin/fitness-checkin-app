@@ -16,40 +16,84 @@
             <header class="app-header">
                 <div>
                     <p class="eyebrow">Workout Tracker</p>
-                    <h1 data-i18n="pageTitle">训练设置</h1>
+                    <h1 id="page-title" data-i18n="pageTitle">训练设置</h1>
                 </div>
 
                 <button id="language-btn" class="icon-btn" type="button">EN</button>
             </header>
 
             <main class="app-main">
-                <section class="settings-section">
-                    <div class="section-heading">
-                        <div>
-                            <h2 data-i18n="defaultExercises">默认训练动作</h2>
-                            <p data-i18n="description">这些动作会显示在新的训练记录中。</p>
+                <!-- Today -->
+                <section id="today-page" class="page" data-page="today">
+                    <h2 data-i18n="today">今日训练</h2>
+                    <p>Today 页面</p>
+                </section>
+
+                <!-- Weekly Plan -->
+                <section id="weekly-page" class="page" data-page="weekly">
+                    <h2 data-i18n="weeklyPlan">每周计划</h2>
+                    <p>Weekly Plan 页面</p>
+                </section>
+
+                <!-- History -->
+                <section id="history-page" class="page" data-page="history">
+                    <h2 data-i18n="history">训练记录</h2>
+                    <p>History 页面</p>
+                </section>
+
+                <!-- Settings -->
+                <section id="settings-page" class="page" data-page="settings">
+                    <section class="settings-section">
+                        <div class="section-heading">
+                            <div>
+                                <h2 data-i18n="defaultExercises">默认训练动作</h2>
+                                <p data-i18n="description">这些动作会显示在新的训练记录中。</p>
+                            </div>
+
+                            <button id="add-exercise-btn" class="primary-btn" type="button" data-i18n="addExercise">
+                                + 添加动作
+                            </button>
                         </div>
 
-                        <button id="add-exercise-btn" class="primary-btn" type="button" data-i18n="addExercise">
-                            + 添加动作
-                        </button>
-                    </div>
+                        <div id="exercise-list" class="exercise-list"></div>
 
-                    <div id="exercise-list" class="exercise-list"></div>
+                        <div class="settings-actions">
+                            <button id="save-settings-btn" class="primary-btn" type="button" data-i18n="saveSettings">
+                                保存设置
+                            </button>
 
-                    <div class="settings-actions">
-                        <button id="save-settings-btn" class="primary-btn" type="button" data-i18n="saveSettings">
-                            保存设置
-                        </button>
+                            <button id="reset-settings-btn" class="secondary-btn" type="button" data-i18n="resetSettings">
+                                恢复默认
+                            </button>
+                        </div>
 
-                        <button id="reset-settings-btn" class="secondary-btn" type="button" data-i18n="resetSettings">
-                            恢复默认
-                        </button>
-                    </div>
-
-                    <p id="settings-message" class="settings-message"></p>
+                        <p id="settings-message" class="settings-message"></p>
+                    </section>
                 </section>
             </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-btn" type="button" data-target="today">
+                    <span class="nav-icon">🏠</span>
+                    <span data-i18n="today">今日训练</span>
+                </button>
+
+                <button class="nav-btn" type="button" data-target="weekly">
+                    <span class="nav-icon">📅</span>
+                    <span data-i18n="weeklyPlan">周计划</span>
+                </button>
+
+                <button class="nav-btn" type="button" data-target="history">
+                    <span class="nav-icon">📋</span>
+                    <span data-i18n="history">记录</span>
+                </button>
+
+                <button class="nav-btn active" type="button" data-target="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span data-i18n="settings">设置</span>
+                </button>
+            </nav>
         </div>
 
         <template id="exercise-card-template">

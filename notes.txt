@@ -9,3 +9,4 @@ Fitness-app:
     
     下一步：
     做底部页面导航和 Weekly Plan 页面。
+    已完成index.html，接下来做navigation.js

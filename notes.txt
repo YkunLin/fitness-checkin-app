@@ -6,7 +6,8 @@ Fitness-app:
     已更新app.js
     已完成style.css
     已完成language.js 语言切换功能，每组次数的名称可能要改成每组数量更合适点
+    已完成navigation.js, 已引入app.js，已完成style.css,responsive.css和language.js
+    已完成底部页面导航
     
     下一步：
-    做底部页面导航和 Weekly Plan 页面。
-    已完成navigation.js, 已引入app.js，接下来做style.css,responsive.css和language.js
+    Weekly Plan 页面。

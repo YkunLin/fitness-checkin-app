@@ -1,0 +1,19 @@
+@media (max-width: 640px) {
+
+    .bottom-nav {
+        bottom: 10px;
+
+        width: calc(100% - 20px);
+    }
+
+
+    .nav-btn {
+        font-size: 0.7rem;
+    }
+
+
+    .nav-icon {
+        font-size: 1.15rem;
+    }
+
+}

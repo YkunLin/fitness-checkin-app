@@ -32,6 +32,73 @@ button {
     width: min(100%, 960px);
     margin: 0 auto;
     padding: 24px;
+
+    padding-bottom: 110px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 16px;
+
+    transform: translateX(-50%);
+
+    width: min(
+        calc(100% - 32px),
+        720px
+    );
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    padding: 8px;
+
+    border: 1px solid #dce6df;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+        0 14px 40px rgb(29 63 42 / 14%);
+
+    backdrop-filter: blur(16px);
+
+    z-index: 100;
+}
+
+.nav-btn {
+    display: grid;
+    justify-items: center;
+    gap: 4px;
+
+    padding: 9px 6px;
+
+    border: 0;
+    border-radius: 14px;
+
+    color: #66736b;
+    background: transparent;
+
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+.nav-btn.active {
+    color: #267347;
+    background: #e8f2ec;
+}
+
+.nav-icon {
+    font-size: 1.25rem;
 }
 
 .app-header {

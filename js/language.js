@@ -29,7 +29,12 @@ const translations = {
         delete: "删除",
 
         exercisePlaceholder: "例如：俯卧撑",
-        unitPlaceholder: "次"
+        unitPlaceholder: "次",
+
+        today: "今日训练",
+        weeklyPlan: "周计划",
+        history: "记录",
+        settings: "设置"
     },
 
     en: {
@@ -52,7 +57,12 @@ const translations = {
         delete: "Delete",
 
         exercisePlaceholder: "e.g. Push-ups",
-        unitPlaceholder: "reps"
+        unitPlaceholder: "reps",
+
+        today: "Today",
+        weeklyPlan: "Weekly Plan",
+        history: "History",
+        settings: "Settings"
     }
 }
 

@@ -31,8 +31,22 @@
 
                 <!-- Weekly Plan -->
                 <section id="weekly-page" class="page" data-page="weekly">
-                    <h2 data-i18n="weeklyPlan">每周计划</h2>
-                    <p>Weekly Plan 页面</p>
+                    <section class="weekly-section">
+                        <div class="weekly-toolbar">
+                            <button id="prev-week-btn" class="secondary-btn" type="button">←</button>
+                            <div class="weekly-title-wrap">
+                                <h2 data-i18n="weeklyPlan">每周计划</h2>
+                                <p id="week-range"></p>
+                            </div>
+                            <button id="next-week-btn" class="secondary-btn" type="button">→</button>
+                        </div>
+                        <div id="weekly-plan-grid" class="weekly-plan-grid"></div>
+                        <div class="weekly-actions">
+                            <button id="this-week-btn" class="secondary-btn" type="button" data-i18n="thisWeek">本周</button>
+                            <button id="save-weekly-plan-btn" class="primary-btn" type="button" data-i18n="saveWeeklyPlan">保存本周计划</button>
+                        </div>
+                        <p id="weekly-message" class="settings-message"></p>
+                    </section>
                 </section>
 
                 <!-- History -->

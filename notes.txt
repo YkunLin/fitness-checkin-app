@@ -10,4 +10,5 @@ Fitness-app:
     已完成底部页面导航
     
     下一步：
-    Weekly Plan 页面。
+    Weekly Plan 页面。编写 weekly-plan.js
+    已完成language.js和index.html中的weekly-plan部分

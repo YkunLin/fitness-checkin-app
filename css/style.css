@@ -252,3 +252,74 @@ select:focus {
 .settings-message.error {
     color: #b23a3a;
 }
+
+.weekly-section {
+    padding: 24px;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 14px 40px rgb(29 63 42 / 8%);
+}
+
+.weekly-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.weekly-title-wrap {
+    text-align: center;
+}
+
+.weekly-title-wrap h2 {
+    margin-bottom: 4px;
+}
+
+#week-range {
+    margin-bottom: 0;
+    color: #66736b;
+}
+
+.weekly-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(180px, 1fr));
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.day-plan-card {
+    min-width: 180px;
+    padding: 16px;
+    border: 1px solid #dce6df;
+    border-radius: 16px;
+    background: #fbfdfb;
+}
+
+.day-plan-card h3 {
+    margin-bottom: 14px;
+}
+
+.day-exercise-list {
+    display: grid;
+    gap: 10px;
+}
+
+.exercise-check-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 500;
+}
+
+.exercise-check-row input {
+    width: auto;
+}
+
+.weekly-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+}

@@ -135,3 +135,92 @@ function renderWeeklyPlan() {
     
     renderWeekRange()
 }
+
+function readPlanFromUI() {
+    const plan = getEmptyWeekPlan()
+
+    document.querySelectorAll(".day-plan-card")
+            .forEach((card) => {
+                const day = card.dataset.day
+
+                const checkedExercises = 
+                    card.querySelectorAll('input[type="checkbox"]:checked')
+                
+                plan[day] = [...checkedExercises].map((checkbox) => checkbox.value)
+            })
+    return plan
+}
+
+function showWeeklyMessage(text) {
+    const message = document.getElementById("weekly-message")
+
+    message.textContent = text
+    message.className = "settings-message success"
+}
+
+function saveCurrentWeekPlan() {
+    const weekKey = getWeekKey()
+
+    weeklyPlans[weekKey] = readPlanFromUI()
+
+    saveWeeklyPlans(weeklyPlans)
+
+    showWeeklyMessage(
+        t("weeklyPlanSaved")
+    )
+}
+
+function changeWeek(offset) {
+    currentWeekStart.setDate(
+        currentWeekStart.getDate() + offset * 7
+    )
+
+    renderWeeklyPlan()
+}
+
+function goToCurrentWeek() {
+    currentWeekStart = getMonday(new Date())
+
+    renderWeeklyPlan()
+}
+
+export function initializeWeeklyPlan() {
+    exercises = getExercises()
+    weeklyPlans = getWeeklyPlans()
+
+    document
+        .getElementById("prev-week-btn")
+        .addEventListener(
+            "click",
+            () => changeWeek(-1)
+        )
+
+    document
+        .getElementById("next-week-btn")
+        .addEventListener(
+            "click",
+            () => changeWeek(1)
+        )
+
+    document
+        .getElementById("this-week-btn")
+        .addEventListener(
+            "click",
+            goToCurrentWeek
+        )
+
+    document
+        .getElementById("save-weekly-plan-btn")
+        .addEventListener(
+            "click",
+            saveCurrentWeekPlan
+        )
+
+    renderWeeklyPlan()
+}
+
+export function refreshWeeklyPlanLanguage() {
+    exercises = getExercises()
+
+    renderWeeklyPlan()
+}

@@ -323,3 +323,10 @@ select:focus {
     gap: 12px;
     margin-top: 24px;
 }
+
+.week-plan-status {
+    margin: 6px 0 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #4d755e;
+}

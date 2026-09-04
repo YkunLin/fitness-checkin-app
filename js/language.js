@@ -47,7 +47,10 @@ const translations = {
         saturday: "周六",
         sunday: "周日",
 
-        weeklyPlanSaved: "本周计划已保存。"
+        weeklyPlanSaved: "本周计划已保存。",
+
+        inheritedPlan: "正在使用最近一周的计划",
+        savedPlan: "本周已有独立计划"
     },
 
     en: {
@@ -88,7 +91,10 @@ const translations = {
         saturday: "Saturday",
         sunday: "Sunday",
 
-        weeklyPlanSaved: "Weekly plan saved."
+        weeklyPlanSaved: "Weekly plan saved.",
+
+        inheritedPlan: "Using the most recent saved plan",
+        savedPlan: "This week has its own saved plan"
     }
 }
 

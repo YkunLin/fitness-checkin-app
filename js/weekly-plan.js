@@ -58,12 +58,36 @@ function getEmptyWeekPlan() {
     }
 }
 
+function getPreviousSavedPlan(currentWeekKey) {
+    const savedWeekKeys = Object.keys(weeklyPlans)
+
+    const previousWeekKeys = savedWeekKeys
+        .filter((weekKey) => weekKey < currentWeekKey)
+        .sort((a, b) => b.localeCompare(a))
+
+    if (previousWeekKeys.length === 0) {
+        return null
+    }
+
+    const nearestPreviousWeekKey = previousWeekKeys[0]
+
+    return weeklyPlans[nearestPreviousWeekKey]
+}
+
 function getCurrentWeekPlan() {
     const weekKey = getWeekKey()
 
-    return weeklyPlans[weekKey]
-        ? structuredClone(weeklyPlans[weekKey])
-        : getEmptyWeekPlan()
+    if (weeklyPlans[weekKey]){
+        return structuredClone(weeklyPlans[weekKey])
+    }
+
+    const previousPlan = getPreviousSavedPlan(weekKey)
+
+    if (previousPlan) {
+        return structuredClone(previousPlan)
+    }
+
+    return getEmptyWeekPlan()
 }
 
 function renderWeekRange() {
@@ -134,6 +158,26 @@ function renderWeeklyPlan() {
     })
     
     renderWeekRange()
+    renderPlanStatus()
+}
+
+function renderPlanStatus() {
+    const weekKey = getWeekKey()
+
+    const status = document.getElementById("week-plan-status")
+
+    if (!status) {
+        return;
+    }
+
+    if (weeklyPlans[weekKey]) {
+        status.textContent = t("savedPlan")
+        return;
+    }
+
+    const previousPlan = getPreviousSavedPlan(weekKey)
+
+    status.textContent = previousPlan ? t("inheritedPlan") : "";
 }
 
 function readPlanFromUI() {
@@ -168,6 +212,8 @@ function saveCurrentWeekPlan() {
     showWeeklyMessage(
         t("weeklyPlanSaved")
     )
+
+    renderPlanStatus()
 }
 
 function changeWeek(offset) {

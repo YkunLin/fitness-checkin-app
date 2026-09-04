@@ -10,6 +10,6 @@ Fitness-app:
     已完成底部页面导航
     已完成language.js和index.html中的weekly-plan部分
     已完成weekly-plan.js的基本逻辑，显示每天的训练计划
+    已完成weeklyplan核心逻辑：未设置的新一周自动继承最近一个已保存周的计划。
     
-    下一步：
-    加weeklyplan核心逻辑：未设置的新一周自动继承最近一个已保存周的计划。
+    下一步：Today 页面

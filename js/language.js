@@ -50,7 +50,14 @@ const translations = {
         weeklyPlanSaved: "本周计划已保存。",
 
         inheritedPlan: "正在使用最近一周的计划",
-        savedPlan: "本周已有独立计划"
+        savedPlan: "本周已有独立计划",
+
+        saveTodayWorkout: "保存今日训练",
+        todayWorkoutSaved: "今日训练已保存。",
+        noWorkoutToday: "今天没有安排训练。",
+        set: "第",
+        setSuffix: "组",
+        completed: "完成"
     },
 
     en: {
@@ -94,7 +101,14 @@ const translations = {
         weeklyPlanSaved: "Weekly plan saved.",
 
         inheritedPlan: "Using the most recent saved plan",
-        savedPlan: "This week has its own saved plan"
+        savedPlan: "This week has its own saved plan",
+
+        saveTodayWorkout: "Save Today's Workout",
+        todayWorkoutSaved: "Today's workout saved.",
+        noWorkoutToday: "No workout is scheduled for today.",
+        set: "Set",
+        setSuffix: "",
+        completed: "Completed"
     }
 }
 

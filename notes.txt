@@ -13,3 +13,6 @@ Fitness-app:
     已完成weeklyplan核心逻辑：未设置的新一周自动继承最近一个已保存周的计划。
     
     下一步：Today 页面
+        已修改index.html
+        已添加新翻译到language.js
+        下一步做today.js

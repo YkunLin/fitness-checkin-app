@@ -15,4 +15,4 @@ Fitness-app:
     下一步：Today 页面
         已修改index.html
         已添加新翻译到language.js
-        下一步做today.js
+        下一步做today.js, 已做完getPreviousSavedPlan function

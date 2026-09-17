@@ -61,3 +61,54 @@ function getPreviousSavedPlan(currentWeekKey) {
 
     return weeklyPlans[previousWeekKeys[0]]
 }
+
+function getPlanForDate(date){
+    const monday = getMonday(date)
+    const weekKey = formatDateKey(monday)
+
+    if (weeklyPlans[weekKey]) {
+        return weeklyPlans[weekKey]
+    }
+
+    return (getPreviousSavedPlan(weekKey) || null)
+}
+
+function getTodayExerciseIds() {
+    const today = new Date()
+    const plan = getPlanForDate(today)
+
+    if (!plan) {
+        return []
+    }
+
+    const dayKey = DAY_KEYS[today.getDay()]
+
+    return plan[dayKey] || []
+}
+
+function getExerciseById(id) {
+    return exercises.find((exercise) => exercise.id === id)
+}
+
+function getTodayWorkoutRecord() {
+    const todayKey = formatDateKey(new Date())
+
+    return workouts.find((workout) => workout.date === todayKey)
+}
+
+function renderTodayDate() {
+    const language = getCurrentLanguage()
+
+    const formatter = new Intl.DateTimeFormat(
+        language === "zh" ? "zh-CN" : "en-US",
+        {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    )
+
+    document.getElementById("today-date")
+            .textContent = formatter.format(new Date())
+}

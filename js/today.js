@@ -112,3 +112,29 @@ function renderTodayDate() {
     document.getElementById("today-date")
             .textContent = formatter.format(new Date())
 }
+
+function createSetRow(exercise, setNumber, savedSet) {
+    const row = document.createElement("label")
+    row.className = "workout-set-row"
+
+    const checkbox = document.createElement("input")
+    checkbox.type = "checkbox"
+    checkbox.className = "set-completed"
+    checkbox.checked = savedSet?.completed || false
+
+    const setLabel = document.createElement("span")
+
+    if (getCurrentLanguage() === "zh") {
+        setLabel.textContent = `${t("set")}${setNumber}${t("setSuffix")}`
+    } else {
+        setLabel.textContent = `${t("set")} ${setNumber}`
+    }
+
+    const value = document.createElement("span")
+    value.className = "set-target-value"
+    value.textContent = `${exercise.defaultValue} ${exercise.units[getCurrentLanguage()]}`
+
+    row.append(checkbox, setLabel, value)
+
+    return row
+}

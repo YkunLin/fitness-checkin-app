@@ -138,3 +138,61 @@ function createSetRow(exercise, setNumber, savedSet) {
 
     return row
 }
+
+function renderExerciseCard(exercise, savedExercise){
+    const card = document.createElement("article")
+    card.className = "today-exercise-card"
+    card.dataset.exerciseId = exercise.id
+
+    const title = document.createElement("h3")
+    title.textContent = exercise.names[getCurrentLanguage()]
+                        || exercise.names.zh
+                        || exercise.id
+
+    const setsContainer = document.createElement("div")
+    setsContainer.className = "workout-sets"
+
+    for(let i = 1; i <= exercise.defaultSets; i++) {
+        const savedSet = savedExercise?.sets?.[i-1]
+        setsContainer.appendChild(createSetRow(exercise, i, savedSet))
+    }
+
+    card.append(title, setsContainer)
+
+    return card
+}
+
+function renderTodayWorkout() {
+    const list = document.getElementById("today-workout-list")
+    list.innerHTML = ""
+
+    const exerciseIds = getTodayExerciseIds()
+
+    renderTodayDate()
+
+    if (exerciseIds.length === 0) {
+        const message = document.createElement("p")
+        message.className = "empty-state"
+        message.textContent = t("noWorkoutToday")
+        
+        list.appendChild(message)
+
+        return;
+    }
+
+    const savedWorkout = getTodayWorkoutRecord()
+
+    exerciseIds.forEach((exerciseId) => {
+        const exercise = getExerciseById(exerciseId)
+
+        if (!exercise) {
+            return;
+        }
+
+        const savedExercise = savedWorkout?.exercises?.find(
+            (item) => item.exerciseId === exercise.id
+        )
+
+        list.appendChild(renderExerciseCard(exercise, savedExercise))
+    })
+}

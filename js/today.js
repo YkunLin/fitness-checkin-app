@@ -254,12 +254,14 @@ export function initializeToday() {
     renderTodayWorkout()
 }
 
-export function refreshTodayLanguage() {
+export function refreshToday() {
     exercises = getExercises()
-
     weeklyPlans = getWeeklyPlans()
-
     workouts = getWorkouts()
 
     renderTodayWorkout()
+}
+
+export function refreshTodayLanguage() {
+    refreshToday()
 }

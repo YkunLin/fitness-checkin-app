@@ -1,3 +1,5 @@
+import { refreshToday } from "./today.js"
+
 const PAGE_TITLES = {
     today: {
         zh: "今日训练",
@@ -34,6 +36,10 @@ function showPage(pageName) {
     currentPage = pageName
 
     updatePageTitle()
+
+    if (pageName === "today") {
+        refreshToday()
+    }
 }
 
 function updatePageTitle() {

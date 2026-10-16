@@ -196,3 +196,26 @@ function renderTodayWorkout() {
         list.appendChild(renderExerciseCard(exercise, savedExercise))
     })
 }
+
+function readTodayWorkoutFromUI() {
+    const todayKey = formatDateKey(new Date())
+
+    const exerciseCards = document.querySelectorAll(".today-exercise-card")
+
+    const workoutExercises = [...exerciseCards].map((card) => {
+        const exerciseId = card.dataset.exerciseId
+        const setCheckboxes = card.querySelectorAll(".set-completed")
+
+        const sets = [...setCheckboxes].map((checkbox, index) => ({
+            setNumber: index + 1,
+            completed: checkbox.checked
+        }))
+        
+        return {exerciseId, sets}
+    })
+
+    return {
+        date: todayKey,
+        exercises: workoutExercises
+    }
+}

@@ -204,6 +204,7 @@ function readTodayWorkoutFromUI() {
 
     const workoutExercises = [...exerciseCards].map((card) => {
         const exerciseId = card.dataset.exerciseId
+
         const setCheckboxes = card.querySelectorAll(".set-completed")
 
         const sets = [...setCheckboxes].map((checkbox, index) => ({
@@ -218,4 +219,47 @@ function readTodayWorkoutFromUI() {
         date: todayKey,
         exercises: workoutExercises
     }
+}
+
+function saveTodayWorkout() {
+    const newWorkout = readTodayWorkoutFromUI()
+
+    const existingIndex = workouts.findIndex((workout) => workout.date === newWorkout.date)
+
+    if (existingIndex >= 0){
+        workouts[existingIndex] = newWorkout
+    } else {
+        workouts.push(newWorkout)
+    }
+
+    saveWorkouts(workouts)
+
+    const message = document.getElementById("today-message")
+
+    message.textContent = t("todayWorkoutSaved")
+
+    message.className = "settings-message success"
+}
+
+export function initializeToday() {
+    exercises = getExercises()
+
+    weeklyPlans = getWeeklyPlans()
+
+    workouts = getWorkouts()
+
+    document.getElementById("save-today-workout-btn")
+            .addEventListener("click", saveTodayWorkout)
+    
+    renderTodayWorkout()
+}
+
+export function refreshTodayLanguage() {
+    exercises = getExercises()
+
+    weeklyPlans = getWeeklyPlans()
+
+    workouts = getWorkouts()
+
+    renderTodayWorkout()
 }

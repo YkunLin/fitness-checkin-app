@@ -387,44 +387,49 @@ select:focus {
 
 .workout-set-row {
     display: grid;
-
-    grid-template-columns:
-        auto
-        1fr
-        auto;
-
+    grid-template-columns: auto 1fr 85px auto;
     align-items: center;
-
     gap: 12px;
 
     padding: 10px 12px;
-
     border-radius: 12px;
-
     background: #ffffff;
 }
 
-
-.workout-set-row input {
-    width: auto;
+.workout-set-row .set-completed {
+    width: 18px;
+    height: 18px;
+    margin: 0;
 }
 
+.set-label {
+    font-weight: 500;
+}
 
-.set-target-value {
+.set-actual-value {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+
+    border: 1px solid #dce6df;
+    border-radius: 8px;
+
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.set-unit {
     color: #66736b;
     font-size: 0.9rem;
 }
-
 
 .today-actions {
     margin-top: 22px;
 }
 
-
 .today-actions button {
     width: 100%;
 }
-
 
 .empty-state {
     padding: 28px;

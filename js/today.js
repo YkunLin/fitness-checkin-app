@@ -218,10 +218,17 @@ function readTodayWorkoutFromUI() {
 
         const setCheckboxes = card.querySelectorAll(".set-completed")
 
-        const sets = [...setCheckboxes].map((checkbox, index) => ({
-            setNumber: index + 1,
-            completed: checkbox.checked
-        }))
+        const sets = [...setCheckboxes].map((checkbox, index) => {
+            const row = checkbox.closest(".workout-set-row")
+
+            const valueInput = row.querySelector(".set-actual-value")
+
+            return {
+                setNumber: index + 1,
+                completed: checkbox.checked,
+                actualValue: Number(valueInput.value)
+            }
+        })
         
         return {exerciseId, sets}
     })
@@ -232,7 +239,34 @@ function readTodayWorkoutFromUI() {
     }
 }
 
+function validateTodayWorkout() {
+    const inputs = document.querySelectorAll(".set-actual-value")
+
+    for (const input of inputs) {
+        const value = Number(input.value)
+
+        if (
+            input.value.trim() === "" ||
+            !Number.isInteger(value) ||
+            value < 0
+        ) {
+            return false
+        }
+    }
+
+    return true
+}
+
 function saveTodayWorkout() {
+    if (!validateTodayWorkout()) {
+        const message = document.getElementById("today-message")
+        message.textContent = getCurrentLanguage() === "zh" ? "请输入有效的训练数值（0 或正整数）。"
+                                                            : "Enter a valid workout value (0 or a positive integer)."
+        message.className = "settings-message error"
+
+        return
+    }
+
     const newWorkout = readTodayWorkoutFromUI()
 
     const existingIndex = workouts.findIndex((workout) => workout.date === newWorkout.date)
@@ -243,7 +277,15 @@ function saveTodayWorkout() {
         workouts.push(newWorkout)
     }
 
-    saveWorkouts(workouts)
+    if (!saveWorkouts(workouts)) {
+        const message = document.getElementById("today-message")
+
+        message.textContent = getCurrentLanguage() === "zh" ? "训练记录保存失败。"
+                                                            : "Failed to save workout."
+        message.className = "settings-message error"
+        
+        return
+    }
 
     const message = document.getElementById("today-message")
 
@@ -276,3 +318,4 @@ export function refreshToday() {
 export function refreshTodayLanguage() {
     refreshToday()
 }
+

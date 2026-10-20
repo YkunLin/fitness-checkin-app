@@ -114,15 +114,16 @@ function renderTodayDate() {
 }
 
 function createSetRow(exercise, setNumber, savedSet) {
-    const row = document.createElement("label")
+    const row = document.createElement("div")
     row.className = "workout-set-row"
 
     const checkbox = document.createElement("input")
     checkbox.type = "checkbox"
     checkbox.className = "set-completed"
-    checkbox.checked = savedSet?.completed || false
+    checkbox.checked = savedSet?.completed ?? false
 
     const setLabel = document.createElement("span")
+    setLabel.className = "set-label"
 
     if (getCurrentLanguage() === "zh") {
         setLabel.textContent = `${t("set")}${setNumber}${t("setSuffix")}`
@@ -130,11 +131,21 @@ function createSetRow(exercise, setNumber, savedSet) {
         setLabel.textContent = `${t("set")} ${setNumber}`
     }
 
-    const value = document.createElement("span")
-    value.className = "set-target-value"
-    value.textContent = `${exercise.defaultValue} ${exercise.units[getCurrentLanguage()]}`
+    const valueInput = document.createElement("input")
+    valueInput.type = "number"
+    valueInput.className = "set-actual-value"
+    valueInput.min = "0"
+    valueInput.step = "1"
+    valueInput.inputMode = "numeric"
+    valueInput.value = savedSet?.actualValue ?? exercise.defaultValue
 
-    row.append(checkbox, setLabel, value)
+    const unitLabel = document.createElement("span")
+    unitLabel.className = "set-unit"
+    unitLabel.textContent = exercise.units[getCurrentLanguage()]
+                        ||  exercise.units.zh
+                        ||  ""
+
+    row.append(checkbox, setLabel, valueInput, unitLabel)
 
     return row
 }

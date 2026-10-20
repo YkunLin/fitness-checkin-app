@@ -57,7 +57,14 @@ const translations = {
         noWorkoutToday: "今天没有安排训练。",
         set: "第",
         setSuffix: "组",
-        completed: "完成"
+        completed: "完成",
+
+        historyTitle: "训练记录",
+        historyDescription: "查看过去的训练情况和每组完成数据。",
+        noHistory: "还没有训练记录。",
+        completedSets: "完成组数",
+        exerciseCount: "训练动作",
+        notCompleted: "未完成"
     },
 
     en: {
@@ -108,7 +115,14 @@ const translations = {
         noWorkoutToday: "No workout is scheduled for today.",
         set: "Set",
         setSuffix: "",
-        completed: "Completed"
+        completed: "Completed",
+
+        historyTitle: "Workout History",
+        historyDescription: "Review your past workouts and set details.",
+        noHistory: "No workout records yet.",
+        completedSets: "Completed Sets",
+        exerciseCount: "Exercises",
+        notCompleted: "Not completed"
     }
 }
 

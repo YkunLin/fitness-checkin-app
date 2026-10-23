@@ -74,3 +74,26 @@ function getWorkoutSummary(workout) {
         completedSets
     }
 }
+
+function createSetDetail(set, exerciseId) {
+    const row = document.createElement("div")
+    row.className = "history-set-row"
+
+    const setLabel = document.createElement("span")
+    setLabel.textContent = getCurrentLanguage() === "zh" ? `第${set.setNumber}组` : `Set ${set.setNumber}`
+
+    const value = document.createElement("span")
+
+    const actualValue = set.actualValue ?? "-"
+    const unit = getExerciseUnit(exerciseId)
+
+    value.textContent = `${actualValue} ${unit}`
+
+    const status = document.createElement("span")
+    status.className = set.completed ? "history-set-status completed" : "history-set-status incomplete"
+    status.textContent = set.completed ? "✓" : t("notCompleted")
+
+    row.append(setLabel, value, status)
+
+    return row
+}

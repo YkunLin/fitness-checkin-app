@@ -14,4 +14,4 @@ Fitness-app:
     已完成today页面的基本组成。
     
     下一步：History 页面
-        第三步：编写 history.js, 已完成createSetDetail()
+        第三步：编写 history.js, 已完成createExerciseDetail()

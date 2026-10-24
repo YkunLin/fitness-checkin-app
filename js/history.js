@@ -97,3 +97,25 @@ function createSetDetail(set, exerciseId) {
 
     return row
 }
+
+function createExerciseDetail(workoutExercise) {
+    const container = document.createElement("div")
+    container.className = "history-exercise"
+
+    const title = document.createElement("h4")
+
+    title.textContent = getExerciseName(workoutExercise.exerciseId)
+
+    const setsContainer = document.createElement("div")
+    setsContainer.className = "history-sets"
+
+    for (const set of workoutExercise.sets || []) {
+        setsContainer.appendChild(
+            createSetDetail(set, workoutExercise.exerciseId)
+        )
+    }
+
+    container.append(title, setsContainer)
+
+    return container
+}

@@ -119,3 +119,74 @@ function createExerciseDetail(workoutExercise) {
 
     return container
 }
+
+function createHistoryCard(workout) {
+    const card = document.createElement("details")
+    card.className = "history-card"
+
+    const summary = document.createElement("summary")
+    summary.className = "history-card-summary"
+
+    const stats = getWorkoutSummary(workout)
+
+    const date = document.createElement("h3")
+    date.textContent = formatHistoryDate(workout.date)
+
+    const description = document.createElement("p")
+
+    description.textContent =
+        getCurrentLanguage() === "zh"
+            ? `${stats.exerciseCount} 个动作 · ${stats.completedSets}/${stats.totalSets} 组完成`
+            : `${stats.exerciseCount} exercises · ${stats.completedSets}/${stats.totalSets} sets completed`
+
+    summary.append(date, description)
+
+    const details = document.createElement("div")
+    details.className = "history-card-details"
+
+    for (const workoutExercise of workout.exercises || []) {
+        details.appendChild(
+            createExerciseDetail(workoutExercise)
+        )
+    }
+
+    card.append(summary, details)
+
+    return card
+}
+
+function renderHistory() {
+    const list = document.getElementById("history-list")
+
+    if (!list) return
+
+    list.innerHTML = ""
+
+    if (workouts.length === 0) {
+        const emptyMessage = document.createElement("p")
+        emptyMessage.className = "empty-state"
+        emptyMessage.textContent = t("noHistory")
+
+        list.appendChild(emptyMessage)
+        return
+    }
+
+    const sortedWorkouts = [...workouts].sort(
+        (a, b) => b.date.localeCompare(a.date)
+    )
+
+    for (const workout of sortedWorkouts) {
+        list.appendChild(createHistoryCard(workout))
+    }
+}
+
+export function refreshHistory() {
+    exercises = getExercises()
+    workouts = getWorkouts()
+
+    renderHistory()
+}
+
+export function initializeHistory() {
+    refreshHistory()
+}

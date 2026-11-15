@@ -4,12 +4,14 @@ import { toggleLanguage, updatePageLanguage } from "./language.js"
 import { initializeNavigation, refreshNavigationLanguage } from "./navigation.js"
 import { initializeWeeklyPlan, refreshWeeklyPlanLanguage } from "./weekly-plan.js"
 import { initializeToday, refreshTodayLanguage } from "./today.js"
+import { initializeHistory, refreshHistory } from "./history.js"
 
 function initializeApp(){
     initializeSettings()
     initializeNavigation()
     initializeToday();
     initializeWeeklyPlan()
+    initializeHistory()
     
     updatePageLanguage()
 
@@ -22,6 +24,7 @@ function initializeApp(){
         refreshSettingsLanguage()
         refreshTodayLanguage();
         refreshWeeklyPlanLanguage()
+        refreshHistory()
 
         updatePageLanguage()
         refreshNavigationLanguage()

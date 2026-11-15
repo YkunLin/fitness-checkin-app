@@ -1,4 +1,5 @@
 import { refreshToday } from "./today.js"
+import { refreshHistory } from "./history.js"
 
 const PAGE_TITLES = {
     today: {
@@ -39,6 +40,10 @@ function showPage(pageName) {
 
     if (pageName === "today") {
         refreshToday()
+    }
+
+    if (pageName === "history") {
+        refreshHistory()
     }
 }
 
